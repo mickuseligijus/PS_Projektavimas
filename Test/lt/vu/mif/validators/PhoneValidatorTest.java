@@ -15,7 +15,6 @@ public class PhoneValidatorTest {
     @BeforeEach
     public void SetUp(){
         phoneValidator = new PhoneValidator();
-        passwordChecker = new PasswordChecker();
     }
     @Test
     public void TestNoSpaceBarsInPhoneNumber(){
