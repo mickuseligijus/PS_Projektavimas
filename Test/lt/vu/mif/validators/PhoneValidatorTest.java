@@ -8,15 +8,13 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestValidators {
+public class PhoneValidatorTest {
     private PhoneValidator phoneValidator;
-    private EmailValidator emailValidator;
-    private PasswordChecker passwordChecker;
+
 
     @BeforeEach
     public void SetUp(){
         phoneValidator = new PhoneValidator();
-        emailValidator = new EmailValidator();
         passwordChecker = new PasswordChecker();
     }
     @Test
