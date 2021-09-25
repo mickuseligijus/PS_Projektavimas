@@ -56,7 +56,7 @@ public class UnitTest {
         assertTrue(PhoneValidator.validatePrefix("LT", "800000000"));
     }
     @Test
-    void testPhonePrefix_true){
+    void testPhonePrefix_true(){
         assertTrue(PhoneValidator.validatePrefix("LT", "+37000000000"));
     }
     @Test
