@@ -2,7 +2,7 @@ package validation;
 
 public class PasswordChecker {
     public static boolean checkLength(String password, int i, int i1) {
-
+    return false;
 
     }
 
