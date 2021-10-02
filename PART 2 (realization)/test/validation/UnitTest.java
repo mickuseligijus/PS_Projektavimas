@@ -3,8 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UnitTest {
 
@@ -64,7 +63,7 @@ public class UnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"+37000000000", "900000000"})
+    @ValueSource(strings = {"+37000000000", "800000000"})
     void testPhonePrefix_true(String number){
         assertTrue(PhoneValidator.validateLength("LT", number));
     }
@@ -137,6 +136,12 @@ public class UnitTest {
     @ValueSource(strings = {"test@email.1aaa"})
     void testEmailTLD_false(String email){
         assertFalse(EmailValidator.validateTLD(email));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"+37062138967", "862138967"})
+    void testReplaceLocalCode_true(String phone){
+        assertEquals("+37062138967", PhoneValidator.replaceLocalCode("LT",phone));
     }
 
 }
