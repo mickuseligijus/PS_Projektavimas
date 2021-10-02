@@ -111,7 +111,7 @@ public class UnitTest {
         assertTrue(EmailValidator.validateServer(email));
     }
     @ParameterizedTest
-    @ValueSource(strings = {"test@","test@#!email.com", "test@.","test@.1", "test@emailcom","test@.com", "te.gamil@com", "test.test@gmail-com"})
+    @ValueSource(strings = {"test@","test@#!email.com", "test@.","test@.1", "test@emailcom","test@.com", "te.gamil@com", "test.test@gmail-com","test.test@gmail....com"})
     void testEmailDomainName_false(String email){
         assertFalse(EmailValidator.validateServer(email));
     }
@@ -138,10 +138,22 @@ public class UnitTest {
         assertFalse(EmailValidator.validateTLD(email));
     }
 
+    //additional tests
+
     @ParameterizedTest
     @ValueSource(strings = {"+37062138967", "862138967"})
     void testReplaceLocalCode_true(String phone){
         assertEquals("+37062138967", PhoneValidator.replaceLocalCode("LT",phone));
     }
+    @Test
+    void testNoCountryCode_false(){
+        assertFalse(PhoneValidator.validatePrefix("PL","+48213659487"));
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {"tes.j@com", "tes@mailcom", "test@mail.c", "test@mail.*ab"})
+    void testMailTLD_false(String email){
+        assertFalse(EmailValidator.validateTLD(email));
+    }
+
 
 }

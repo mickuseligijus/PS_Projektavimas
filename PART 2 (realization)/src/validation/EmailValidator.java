@@ -107,6 +107,9 @@ public class EmailValidator {
             return false;
         }
         else {
+            if (email.lastIndexOf('.') < email.indexOf('@')){
+                return false;
+            }
             if (email.lastIndexOf('.') > email.indexOf('@')) {
                 String tld = email.substring(email.lastIndexOf('.') + 1);
                 if (tld.length() < 2) {
