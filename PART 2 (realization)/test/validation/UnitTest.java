@@ -108,14 +108,13 @@ public class UnitTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"test@email.com", "test@EMAIL.COM", "test@123.info", "test@1.com"})
-    void testEmailDomainName_true(){
-        assertTrue(EmailValidator.validateServer("test@.com"));
+    void testEmailDomainName_true(String email){
+        assertTrue(EmailValidator.validateServer(email));
     }
     @ParameterizedTest
-    @ValueSource(strings = {"test@","test@#!email.com", "test@eeeeemmmmmaaaaaiiiiilllll.aaa", "test@12.com",
-            "test@eeeeemmmmmaaaaaiiiiillllleeeeemmmmmaaaaaiiiiillllleeeeemmmmmaaaaaiiiiilllll.com"})
-    void testEmailDomainName_false(){
-        assertFalse(EmailValidator.validateServer("test@.com"));
+    @ValueSource(strings = {"test@","test@#!email.com", "test@.","test@.1", "test@emailcom","test@.com", "te.gamil@com", "test.test@gmail-com"})
+    void testEmailDomainName_false(String email){
+        assertFalse(EmailValidator.validateServer(email));
     }
 
     @ParameterizedTest
@@ -135,8 +134,9 @@ public class UnitTest {
         assertTrue(EmailValidator.validateTLD(email));
     }
     @ParameterizedTest
-    @ValueSource(strings = {"test@email.aaaa"})
+    @ValueSource(strings = {"test@email.1aaa"})
     void testEmailTLD_false(String email){
         assertFalse(EmailValidator.validateTLD(email));
     }
+
 }

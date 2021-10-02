@@ -6,8 +6,8 @@ public class EmailValidator {
         boolean isLetterOrDigit(char a);
     }
 
-    public static boolean validateAt(String s) {
-        return false;
+    public static boolean validateAt(String email) {
+        return validateSymbols(email) && validateServer(email) && validateTLD(email);
     }
 
     public static boolean validateSymbols(String email) {
@@ -58,11 +58,70 @@ public class EmailValidator {
         return true;
     }
 
-    public static boolean validateServer(String s) {
-        return false;
+    public static boolean validateServer(String email) {
+
+        Function f = (char a) -> {
+            return (a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a<='9');
+        };
+
+        if (email.lastIndexOf('.')<0 || email.indexOf('@')<0) {
+            return false;
+        }
+        else {
+            if (email.lastIndexOf('.') > email.indexOf('@') ) {
+                String domain = email.substring(email.indexOf('@') + 1, email.lastIndexOf('.'));
+                if (domain.length()>253 || domain.length()==0) {
+                    return false;
+                }
+
+                for (int i = 0; i < domain.length(); i++) {
+                    if (!f.isLetterOrDigit(domain.charAt(i))) {
+                        if (domain.charAt(i) == '.' || domain.charAt(i) == '-') {
+                            if (i != 0 && i != domain.length() - 1) {
+                                if (!f.isLetterOrDigit(domain.charAt(i - 1)) || !f.isLetterOrDigit(domain.charAt(i + 1))) {
+                                    return false;
+                                }
+                            }
+                        }
+                        if (domain.charAt(i) != '.' || domain.charAt(i) != '-') {
+                            return false;
+                        }
+
+                    }
+                }
+
+            }
+            else return false;
+        }
+
+        return true;
     }
 
     public static boolean validateTLD(String email) {
-        return false;
+
+        Function f = (char a) -> {
+            return (a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a<='9');
+        };
+
+        if (email.lastIndexOf('.')<0 || email.indexOf('@')<0) {
+            return false;
+        }
+        else {
+            if (email.lastIndexOf('.') > email.indexOf('@')) {
+                String tld = email.substring(email.lastIndexOf('.') + 1);
+                if (tld.length() < 2) {
+                    return false;
+                }
+                if (tld.charAt(0) >= '0' && tld.charAt(0) <= '9') {
+                    return false;
+                }
+                for (int i = 0; i < tld.length(); i++) {
+                    if (!f.isLetterOrDigit(tld.charAt(i))) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
