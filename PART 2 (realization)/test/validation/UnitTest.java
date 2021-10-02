@@ -85,7 +85,7 @@ public class UnitTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"TesT@email.com", "te123st@email.com", "!#$%&'*+-/=?^_`{|}~@email.com"})
+    @ValueSource(strings = {"TesT@email.com", "te123st@email.com", "a!b#c$d%e&f'g*h+i-j/k=l?m^n_o`p{r|s}kk~v@email.com"})
     void testEmailSymbols_true(String email){
         assertTrue(EmailValidator.validateSymbols(email));
     }
