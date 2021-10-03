@@ -11,15 +11,11 @@ public class EmailValidator {
     }
 
     public static boolean validateSymbols(String email) {
-
+        if (email==null || email.isEmpty()) return false;
         Function f = (char a) -> {
             return (a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a<='9');
         };
 
-        if (email.isEmpty()) {
-            return false;
-        }
-        else {
             if (!f.isLetterOrDigit(email.charAt(0))) {
                 return false;
             }
@@ -28,6 +24,7 @@ public class EmailValidator {
             }
 
             int i = email.indexOf('@');
+
             if (i == email.length()-1) {
                 return false;
             }
@@ -47,19 +44,13 @@ public class EmailValidator {
                     if(!f.isLetterOrDigit(email.charAt(ii-1)) || !f.isLetterOrDigit(email.charAt(ii+1))){
                         return false;
                     }
-                    if(email.charAt(ii-1) == email.charAt(ii) || email.charAt(ii+1) == email.charAt(ii)) {
-                        return false;
-                    }
                 }
                 }
-
-
-        }
         return true;
     }
 
     public static boolean validateServer(String email) {
-
+        if (email==null || email.isEmpty()) return false;
         Function f = (char a) -> {
             return (a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a<='9');
         };
@@ -98,7 +89,7 @@ public class EmailValidator {
     }
 
     public static boolean validateTLD(String email) {
-
+        if (email==null || email.isEmpty()) return false;
         Function f = (char a) -> {
             return (a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z') || (a >= '0' && a<='9');
         };

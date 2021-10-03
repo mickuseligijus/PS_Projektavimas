@@ -19,8 +19,8 @@ public class PhoneValidator {
     }
 
     public static boolean validateNumbers(String number) {
+        if (number == null || number.isEmpty()) return false;
         Function f = (char a) -> a >= '0' && a<='9';
-        if (number.isEmpty()) return false;
             for (int i=0; i<number.length(); i++){
                 if (!f.isDigit(number.charAt(i))){
                     if (i==0 && number.charAt(0)=='+') continue;
@@ -31,7 +31,7 @@ public class PhoneValidator {
     }
 
     public static boolean validatePrefix(String countryCode, String number) {
-        if(!number.isEmpty() && validateLength(countryCode,number)){
+        if(number!=null && !number.isEmpty() && validateLength(countryCode,number)){
             for (Country country : countriesList) {
               if (countryCode == country.getCode()){
                   if(number.startsWith(country.getLocalPhoneCode()) || number.startsWith(country.getPhoneCode())){
@@ -46,7 +46,7 @@ public class PhoneValidator {
 
     public static boolean validateLength(String countryCode, String number) {
 
-        if (!number.isEmpty() && validateNumbers(number) ) {
+        if (number!=null && !number.isEmpty() && validateNumbers(number) ) {
             for (Country country : countriesList) {
                 if (country.getCode() == countryCode) {
 
@@ -68,6 +68,7 @@ public class PhoneValidator {
     }
 
     public static String replaceLocalCode (String countryCode, String number){
+        if (number == null || number.isEmpty()) return "";
         if (validatePrefix(countryCode,number)){
             if (number.startsWith("8")) {
                 return "+370" + number.substring(1);

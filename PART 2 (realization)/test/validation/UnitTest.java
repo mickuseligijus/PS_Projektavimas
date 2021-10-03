@@ -1,6 +1,7 @@
 package validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -141,6 +142,17 @@ public class UnitTest {
     //additional tests
 
     @ParameterizedTest
+    @ValueSource(strings = {"passwordas!12", "paSwordelis123"})
+    void testPW_false(String password){
+        assertFalse(PasswordChecker.validate(password,2,5));
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {"paSswordas!12", "paSword?elis123"})
+    void testPW_true(String password){
+        assertFalse(PasswordChecker.validate(password,2,5));
+    }
+
+    @ParameterizedTest
     @ValueSource(strings = {"+37062138967", "862138967"})
     void testReplaceLocalCode_true(String phone){
         assertEquals("+37062138967", PhoneValidator.replaceLocalCode("LT",phone));
@@ -153,6 +165,67 @@ public class UnitTest {
     @ValueSource(strings = {"tes.j@com", "tes@mailcom", "test@mail.c", "test@mail.*ab"})
     void testMailTLD_false(String email){
         assertFalse(EmailValidator.validateTLD(email));
+    }
+    @ParameterizedTest
+    @ValueSource(strings = {"t@", "tes@mailcom.","test,x@gmail.com"})
+    void testMail_false(String email){
+        assertFalse(EmailValidator.validateSymbols(email));
+    }
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void pwValidate_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PasswordChecker.validate(input,0,200));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void pwcLength_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PasswordChecker.checkLength(input,0,10));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void pwSpecialSymbols_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PasswordChecker.checkSpecialSymbols(input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void pwUpperCase_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PasswordChecker.checkUppercase(input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void phonePrefix_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PhoneValidator.validatePrefix(input,input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void phoneLength_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PhoneValidator.validateLength(input,input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void phoneNumbers_ShouldReturnFalseForNullAndEmptyStrings(String input) {
+        assertFalse(PhoneValidator.validateNumbers(input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void emailSymbols_ShouldReturnFalseForNullAndEmptyStrings(String input){
+        assertFalse(EmailValidator.validateSymbols(input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void emailServer_ShouldReturnFalseForNullAndEmptyStrings(String input){
+        assertFalse(EmailValidator.validateServer(input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void emailAt_ShouldReturnFalseForNullAndEmptyStrings(String input){
+        assertFalse(EmailValidator.validateAt(input));
+    }
+    @ParameterizedTest
+    @NullAndEmptySource
+    void emailTLD_ShouldReturnFalseForNullAndEmptyStrings(String input){
+        assertFalse(EmailValidator.validateTLD(input));
     }
 
 
