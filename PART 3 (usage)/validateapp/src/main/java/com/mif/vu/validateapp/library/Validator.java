@@ -1,4 +1,4 @@
-package com.mif.vu.validateapp.service;
+package com.mif.vu.validateapp.library;
 
 public class Validator {
     private final String[] specialChars = { ",", ".", "~", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=" };

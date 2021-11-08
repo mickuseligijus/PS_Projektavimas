@@ -8,6 +8,8 @@ public class ValidateappApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ValidateappApplication.class, args);
+		
+		System.out.println("Sveiki");
 	}
 
 }
