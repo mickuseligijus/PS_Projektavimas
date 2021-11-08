@@ -17,7 +17,7 @@ public class ValidationService {
 	}
 	
 	public boolean validateEmail(String email) {
-		return validator.validatePassword(email);
+		return validator.validateEmail(email);
 	}
 	
 	public boolean validatePhone(String phone) {

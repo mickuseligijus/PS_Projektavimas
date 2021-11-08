@@ -21,5 +21,9 @@ public class VartotojasService {
 	public Vartotojas add(Vartotojas vartotojas) {
 		return repository.save(vartotojas);
 	}
+	
+	public void delete(long id) {
+		repository.deleteById(id);
+	}
 
 }
