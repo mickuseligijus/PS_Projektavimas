@@ -11,6 +11,7 @@ import com.mif.vu.validateapp.library.Validator;
 public class ValidationService {
 
 	private Validator validator;
+	
 	public ValidationService() {
 		validator = new Validator();
 	}
