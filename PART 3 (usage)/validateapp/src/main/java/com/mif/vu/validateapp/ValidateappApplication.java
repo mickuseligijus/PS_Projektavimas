@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.mif.vu.validateapp.controller.VartotojasController;
-import com.mif.vu.validateapp.library.Validator;
 
 @SpringBootApplication
 public class ValidateappApplication implements CommandLineRunner {
@@ -22,11 +21,8 @@ public class ValidateappApplication implements CommandLineRunner {
 	
 	@Override
     public void run(String... args) throws IOException {
-		//vartotojasController.start();
+		vartotojasController.start();
 		
-		Validator v = new Validator();
-		
-		System.out.println(v.validateEmail("test@gmail.com"));
 	}
 	
 

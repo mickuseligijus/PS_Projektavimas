@@ -22,8 +22,31 @@ public class VartotojasService {
 		return repository.save(vartotojas);
 	}
 	
-	public void delete(long id) {
+	public void deleteById(long id) {
 		repository.deleteById(id);
+	}
+	
+	public void update(long id, String vardas, String pavarde, String numeris, String email, String adresas, String slaptazodis) {
+		Vartotojas vartotojas = repository.findById(id).get();
+		vartotojas.setAdresas(adresas);
+		vartotojas.setEmail(email);
+		vartotojas.setPavarde(pavarde);
+		vartotojas.setVardas(vardas);
+		vartotojas.setSlaptazodis(slaptazodis);
+		vartotojas.setTelefonoNumeris(numeris);
+		repository.save(vartotojas);
+	}
+	
+	public boolean existsById(long id) {
+		
+		return repository.existsById(id);
+		
+	}
+	
+	public Vartotojas findById(long id) {
+		
+		return repository.findById(id).get();
+		
 	}
 
 }
