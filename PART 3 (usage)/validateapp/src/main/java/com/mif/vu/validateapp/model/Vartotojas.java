@@ -1,10 +1,16 @@
 package com.mif.vu.validateapp.model;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Vartotojas {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+	private long id;
+
 	private String vardas;
 	private String pavarde;
 	private String telefonoNumeris;
@@ -25,6 +31,12 @@ public class Vartotojas {
 		this.email = email;
 		this.adresas = adresas;
 		this.slaptazodis = slaptazodis;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	public String getVardas() {
 		return vardas;
